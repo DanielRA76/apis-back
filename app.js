@@ -7,12 +7,18 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('passport');
 
+const users = require('./routes/user'); 
+
 
 var app = express();
+app.use(passport.initialize());
+require('./passport')(passport);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use('/api/users', users);
 
 //app.use(cookieParser());
 //para servir ficheros estáticos
